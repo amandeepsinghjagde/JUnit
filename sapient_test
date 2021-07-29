@@ -1,0 +1,61 @@
+// package whatever; // don't place package name!
+
+//Input: arr[] = {2, 3, 2, 4, 5, 12, 2, 3, 3, 3, 12}
+//Output: 3 3 3 3 2 2 2 12 12 4 5
+
+import java.io.*;
+
+class MyCode {
+	public static void main (String[] args) {
+		System.out.println("Hello Java");
+    //
+    int arr[] = {2, 3, 2, 4, 5, 12, 2, 3, 3, 3, 12};
+    Map<Integer,Integer> freqMap = new HashMap<>();
+    //calculates the freq of all numbers
+    for(int i=0;i<arr.size();i++){
+      int myKey = arr[i];
+      int count = freqMap.get(myKey);
+      if(count == 0){
+        freqMap.put(myKey,1);
+      }else{
+         freqMap.put(myKey,++count);
+      }
+    }
+
+    Set<Integer> countsSet = freqMap.valueSet();
+    //sorted the set
+    countsSet.sort(SORT.Desc);
+    //iterating descending number of countSet
+    countsSet.forEach(count ->{
+     for(Map.entry<Integer, Integer> myEntry:freqMap.getEntrySet()){
+       //when the count == myEntry count
+       if(myEntry.value == count){
+         //printing it number of times it occurs
+         for(int i =0;i<count;i++){
+           System.out.println(myEntry.key);
+         }
+       }
+     }
+    });
+
+    }
+}
+
+
+
+
+
+
+
+
+Write a query to get count of employees in a country except Nepal
+Employee table
+Id   name       salary_id  country
+1        vishal   		1	    india
+2.       Vicky.    		7	    usa
+3.       Ramesh 		  6	    nepal
+4        vikram  		  9	    india
+1         jay 		    5	    india
+1         David 		  5	    uk
+
+select count(*),country from Employee where country != 'Nepal' and salary_id <=5 groupBy country
